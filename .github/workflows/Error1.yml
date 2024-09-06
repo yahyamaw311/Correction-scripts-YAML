@@ -4,12 +4,13 @@ name: Error1
 on:
   # Déclenche le workflow quand il y a un push ou un pull request sur la branche “main”
     push:
-        branches: [ "main" ]
+        branches: 
+        - "main"
     pull_request:
-        branches: [ "main" ]
+        branches:
+        - "main"
 
 jobs:
-  # Ce workflow contient un seul job appelé “build”
   build:
     runs-on: ${{ inputs.os }}
     steps:
