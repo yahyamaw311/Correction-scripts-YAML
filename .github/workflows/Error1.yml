@@ -4,16 +4,26 @@ name: Error1
 on:
   # Déclenche le workflow quand il y a un push ou un pull request sur la branche “main”
     push:
-        branches: 
-        - "main"
+      branches: [ "main" ]
     pull_request:
-        branches:
-        - "main"
+      branches: [ "main" ]
+    workflow_dispatch:
+      inputs:
+        os:
+          type: string
+          description: 'system d exploitation'
+          default: 'ubuntu-latest'
+          required: true
+        surname:
+          type: string
+          decritpion: 'prenom'
+          default: 'john-doe'
+          required: true
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v4
     - name: Run a one-line script
-      run: echo Hello, ${{ inputs.username }}! 
+      run: echo Hello, ${{ inputs.surname || 'john-doe' }}! 
